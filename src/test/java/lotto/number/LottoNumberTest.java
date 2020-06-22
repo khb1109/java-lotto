@@ -1,4 +1,4 @@
-package lotto;
+package lotto.number;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -6,8 +6,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
-
-import lotto.number.LottoNumber;
 
 class LottoNumberTest {
 	@DisplayName("로또를 생성할 때 1~45를 제외한 수로 입력 시 에러를 발생한다.")

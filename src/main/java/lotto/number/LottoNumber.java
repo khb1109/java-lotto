@@ -27,6 +27,13 @@ public class LottoNumber {
 		}
 	}
 
+	@Override
+	public String toString() {
+		return "LottoNumber{" +
+			"number=" + number +
+			'}';
+	}
+
 	public int getNumber() {
 		return number;
 	}
