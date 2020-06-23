@@ -9,7 +9,7 @@ public class LottoAmount {
 	private final AutoLottoAmount autoLottoAmount;
 	private int manualLottoCount;
 
-	public LottoAmount(ManualLottoAmount manualLottoAmount, AutoLottoAmount autoLottoAmount) {
+	private LottoAmount(ManualLottoAmount manualLottoAmount, AutoLottoAmount autoLottoAmount) {
 		this.manualLottoAmount = manualLottoAmount;
 		this.autoLottoAmount = autoLottoAmount;
 		this.manualLottoCount = 0;
@@ -28,6 +28,14 @@ public class LottoAmount {
 
 	public void next() {
 		manualLottoCount++;
+	}
+
+	public ManualLottoAmount getManualLottoAmount() {
+		return manualLottoAmount;
+	}
+
+	public AutoLottoAmount getAutoLottoAmount() {
+		return autoLottoAmount;
 	}
 
 	public int getManualLottoCount() {

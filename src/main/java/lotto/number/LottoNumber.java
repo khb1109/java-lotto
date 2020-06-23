@@ -15,7 +15,7 @@ public class LottoNumber {
 		this.number = number;
 	}
 
-	public static LottoNumber valueOf(int number) {
+	public static LottoNumber valueOf(Integer number) {
 		validate(number);
 		return LottoNumberCache.lottoNumberByNumber
 			.get(number);

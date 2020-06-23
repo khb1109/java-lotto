@@ -32,4 +32,8 @@ public class Lotto {
 	public boolean isContains(LottoNumber lottoNumber) {
 		return lottoNumbers.contains(lottoNumber);
 	}
+
+	public Set<LottoNumber> getLottoNumbers() {
+		return lottoNumbers;
+	}
 }

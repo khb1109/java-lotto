@@ -3,10 +3,12 @@ package controller;
 import static java.util.stream.Collectors.*;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import lotto.Lotto;
+import lotto.LottoFactory;
 import lotto.LottoMoney;
 import lotto.amount.LottoAmount;
 import lotto.number.LottoNumber;
@@ -28,6 +30,7 @@ public class LottoController {
 
 		outputView.showManualLotto();
 		List<Lotto> lottos = readManualLottoNumbers(lottoAmount);
+		lottos.addAll(buyAutoLottos(lottoAmount));
 
 		outputView.showPurchasedLotto(lottoAmount, lottos);
 
@@ -52,5 +55,9 @@ public class LottoController {
 		}
 
 		return lottos;
+	}
+
+	private List<Lotto> buyAutoLottos(LottoAmount lottoAmount) {
+		return LottoFactory.createLotto(lottoAmount, Collections::shuffle);
 	}
 }
