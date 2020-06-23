@@ -13,6 +13,7 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 
+import helper.LottoProvider;
 import lotto.number.LottoNumber;
 
 class LottoTest {
@@ -65,5 +66,14 @@ class LottoTest {
 		LottoNumber lottoNumber = LottoNumber.valueOf(number);
 
 		assertThat(lotto.isContains(lottoNumber)).isEqualTo(expect);
+	}
+
+	@DisplayName("로또 번호와 비교하여 몇개 맞았는지 확인한다.")
+	@Test
+	void countMatch() {
+		Lotto lotto = LottoProvider.create(1, 2, 3, 4, 5, 6);
+		Lotto other = LottoProvider.create(1, 2, 3, 4, 5, 6);
+
+		assertThat(lotto.countMatch(other)).isEqualTo(6);
 	}
 }

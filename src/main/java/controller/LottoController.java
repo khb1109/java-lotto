@@ -5,11 +5,14 @@ import static java.util.stream.Collectors.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Map;
 
 import lotto.Lotto;
 import lotto.LottoFactory;
+import lotto.LottoManager;
 import lotto.LottoMoney;
+import lotto.Rank;
+import lotto.WinningLotto;
 import lotto.amount.LottoAmount;
 import lotto.number.LottoNumber;
 import view.InputView;
@@ -31,13 +34,14 @@ public class LottoController {
 		outputView.showManualLotto();
 		List<Lotto> lottos = readManualLottoNumbers(lottoAmount);
 		lottos.addAll(buyAutoLottos(lottoAmount));
-
 		outputView.showPurchasedLotto(lottoAmount, lottos);
 
-		inputView.winningLotto();
-		inputView.bonusNumber();
+		WinningLotto winningLotto = readWinningLotto();
 
-		outputView.showWinningStatistics();
+		LottoManager lottoManager = new LottoManager(lottos, winningLotto);
+		Map<Rank, Integer> rankByCount = lottoManager.calculateRanks();
+
+		outputView.showWinningStatistics(rankByCount);
 		outputView.showProfit();
 	}
 
@@ -49,7 +53,7 @@ public class LottoController {
 				inputView.manualLotto()
 					.stream()
 					.map(LottoNumber::valueOf)
-					.collect(Collectors.collectingAndThen(toList(), Lotto::new))
+					.collect(collectingAndThen(toList(), Lotto::new))
 			);
 			lottoAmount.next();
 		}
@@ -59,5 +63,15 @@ public class LottoController {
 
 	private List<Lotto> buyAutoLottos(LottoAmount lottoAmount) {
 		return LottoFactory.createLotto(lottoAmount, Collections::shuffle);
+	}
+
+	private WinningLotto readWinningLotto() {
+		Lotto lottoNumbers = inputView.winningLotto().stream()
+			.map(LottoNumber::valueOf)
+			.collect(collectingAndThen(toList(), Lotto::new));
+
+		LottoNumber bonusNumber = LottoNumber.valueOf(inputView.bonusNumber());
+
+		return new WinningLotto(lottoNumbers, bonusNumber);
 	}
 }

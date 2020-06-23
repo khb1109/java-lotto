@@ -1,9 +1,11 @@
 package view;
 
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import lotto.Lotto;
+import lotto.Rank;
 import lotto.amount.LottoAmount;
 import lotto.number.LottoNumber;
 
@@ -30,7 +32,7 @@ public class OutputView {
 		System.out.println();
 	}
 
-	public void showWinningStatistics() {
+	public void showWinningStatistics(Map<Rank, Integer> lottoManager) {
 		System.out.println("당첨 통계\n"
 			+ "---------\n"
 			+ "3개 일치 (5000원)- 1개\n"

@@ -14,4 +14,20 @@ public class WinningLotto {
 		this.lotto = lotto;
 		this.bonusNumber = lottoNumber;
 	}
+
+	public int countMatch(Lotto lotto) {
+		return this.lotto.countMatch(lotto);
+	}
+
+	public boolean checkBonus(Lotto lotto) {
+		return lotto.isContains(this.bonusNumber);
+	}
+
+	@Override
+	public String toString() {
+		return "WinningLotto{" +
+			"lotto=" + lotto +
+			", bonusNumber=" + bonusNumber +
+			'}';
+	}
 }

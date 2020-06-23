@@ -36,4 +36,17 @@ public class Lotto {
 	public Set<LottoNumber> getLottoNumbers() {
 		return lottoNumbers;
 	}
+
+	public int countMatch(Lotto other) {
+		return (int)lottoNumbers.stream()
+			.filter(other::isContains)
+			.count();
+	}
+
+	@Override
+	public String toString() {
+		return "Lotto{" +
+			"lottoNumbers=" + lottoNumbers +
+			'}';
+	}
 }
