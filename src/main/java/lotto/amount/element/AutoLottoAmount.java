@@ -2,7 +2,7 @@ package lotto.amount.element;
 
 import lotto.LottoMoney;
 
-public class AutoLottoAmount extends Amount {
+public final class AutoLottoAmount extends Amount {
 	public AutoLottoAmount(int amount) {
 		super(amount);
 	}

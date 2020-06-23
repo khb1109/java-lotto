@@ -16,12 +16,21 @@ class LottoAmountTest {
 			.hasMessageContaining("수동로또 구매 갯수가 금액을 초과했습니다.");
 	}
 
-}
+	@DisplayName("다음으로 입력받을 수 있는지 확인한다.")
+	@Test
+	void hasNext() {
+		LottoAmount lottoAmount = LottoAmount.valueOf(new LottoMoney(1000), 1);
 
-// - 수동으로 구매할 로또 갯수를 입력받는다.
-//     -
-// - 자동 로또 구매 갯수를 구한다.
-//     - 나머지 금액으로 자동로또를 구매한다.
-// - 구매한 로또들을 출력한다.
-// - 당첨통계를 출력한다.
-// - 총 수익률을 출력한다.
+		assertThat(lottoAmount.hasNext()).isTrue();
+	}
+
+	@DisplayName("수동로또티켓의 카운트가 증가하는지 확인한다.")
+	@Test
+	void next() {
+		LottoAmount lottoAmount = LottoAmount.valueOf(new LottoMoney(1000), 1);
+
+		lottoAmount.next();
+
+		assertThat(lottoAmount.getManualLottoCount()).isEqualTo(1);
+	}
+}

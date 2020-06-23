@@ -1,11 +1,16 @@
 package view;
 
+import java.util.List;
+
+import lotto.Lotto;
+import lotto.amount.LottoAmount;
+
 public class OutputView {
 	public void showManualLotto() {
 		System.out.println("수동으로 구매할 번호를 입력해 주세요.");
 	}
 
-	public void showPurchasedLotto() {
+	public void showPurchasedLotto(LottoAmount lottoAmount, List<Lotto> lottos) {
 		System.out.println("수동으로 3장, 자동으로 11개를 구매했습니다.\n"
 			+ "[8, 21, 23, 41, 42, 43]\n"
 			+ "[3, 5, 11, 16, 32, 38]\n"

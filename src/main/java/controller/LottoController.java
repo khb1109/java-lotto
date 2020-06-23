@@ -1,7 +1,15 @@
 package controller;
 
+import static java.util.stream.Collectors.*;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import lotto.Lotto;
 import lotto.LottoMoney;
 import lotto.amount.LottoAmount;
+import lotto.number.LottoNumber;
 import view.InputView;
 import view.OutputView;
 
@@ -19,16 +27,30 @@ public class LottoController {
 		LottoAmount lottoAmount = LottoAmount.valueOf(lottoMoney, inputView.manualLottoAmount());
 
 		outputView.showManualLotto();
-		// for (int i = 0; i < lottoAmount; i++) {
-		// 	List<Integer> integers = inputView.manualLotto();
-		// }
+		List<Lotto> lottos = readManualLottoNumbers(lottoAmount);
 
-		outputView.showPurchasedLotto();
+		outputView.showPurchasedLotto(lottoAmount, lottos);
 
 		inputView.winningLotto();
 		inputView.bonusNumber();
 
 		outputView.showWinningStatistics();
 		outputView.showProfit();
+	}
+
+	private List<Lotto> readManualLottoNumbers(LottoAmount lottoAmount) {
+		List<Lotto> lottos = new ArrayList<>();
+
+		while (lottoAmount.hasNext()) {
+			lottos.add(
+				inputView.manualLotto()
+					.stream()
+					.map(LottoNumber::valueOf)
+					.collect(Collectors.collectingAndThen(toList(), Lotto::new))
+			);
+			lottoAmount.next();
+		}
+
+		return lottos;
 	}
 }
