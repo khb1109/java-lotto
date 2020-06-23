@@ -37,10 +37,18 @@ public enum Rank {
 
 	private static Rank of(int match, boolean hasBonusMatch) {
 		return Arrays.stream(values())
-			.filter(rank -> rank.match == match)
+			.filter(rank -> rank.isSameMatch(match))
 			.filter(rank -> !rank.equals(FIVE_BONUS) || hasBonusMatch)
 			.findAny()
 			.orElse(NONE_MATCH);
+	}
+
+	private boolean isSameMatch(int match) {
+		return this.match == match;
+	}
+
+	public long multiplyMoneyByCount(int count) {
+		return this.money * count;
 	}
 
 	public int getMatch() {
@@ -49,9 +57,5 @@ public enum Rank {
 
 	public long getMoney() {
 		return money;
-	}
-
-	public long multiplyMoneyByCount(int count) {
-		return this.money * count;
 	}
 }
