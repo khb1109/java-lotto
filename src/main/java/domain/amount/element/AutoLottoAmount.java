@@ -5,7 +5,7 @@ import java.util.Objects;
 import domain.amount.LottoMoney;
 
 public final class AutoLottoAmount extends Amount {
-	public AutoLottoAmount(int amount) {
+	private AutoLottoAmount(int amount) {
 		super(amount);
 	}
 

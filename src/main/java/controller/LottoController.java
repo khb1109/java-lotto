@@ -3,7 +3,6 @@ package controller;
 import static java.util.stream.Collectors.*;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -14,6 +13,7 @@ import domain.lotto.Lotto;
 import domain.lotto.LottoFactory;
 import domain.lotto.WinningLotto;
 import domain.lotto.number.LottoNumber;
+import domain.lotto.strategy.SequenceStrategy;
 import domain.statistics.Rank;
 import view.InputView;
 import view.OutputView;
@@ -21,10 +21,13 @@ import view.OutputView;
 public class LottoController {
 	private final InputView inputView;
 	private final OutputView outputView;
+	private final SequenceStrategy sequenceStrategy;
 
-	public LottoController(InputView inputView, OutputView outputView) {
+	public LottoController(InputView inputView, OutputView outputView,
+		SequenceStrategy sequenceStrategy) {
 		this.inputView = inputView;
 		this.outputView = outputView;
+		this.sequenceStrategy = sequenceStrategy;
 	}
 
 	public void run() {
@@ -62,7 +65,7 @@ public class LottoController {
 	}
 
 	private List<Lotto> buyAutoLottos(LottoAmount lottoAmount) {
-		return LottoFactory.createLotto(lottoAmount, Collections::shuffle);
+		return LottoFactory.createLotto(lottoAmount, sequenceStrategy);
 	}
 
 	private WinningLotto readWinningLotto() {

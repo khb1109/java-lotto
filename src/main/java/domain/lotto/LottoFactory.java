@@ -11,6 +11,7 @@ import java.util.stream.IntStream;
 
 import domain.amount.LottoAmount;
 import domain.lotto.number.LottoNumber;
+import domain.lotto.strategy.SequenceStrategy;
 
 public class LottoFactory {
 	private static final List<LottoNumber> lottoNumbers;

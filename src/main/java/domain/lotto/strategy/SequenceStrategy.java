@@ -1,4 +1,4 @@
-package domain.lotto;
+package domain.lotto.strategy;
 
 import java.util.List;
 

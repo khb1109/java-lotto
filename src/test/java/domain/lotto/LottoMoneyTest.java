@@ -32,7 +32,7 @@ class LottoMoneyTest {
 	@Test
 	void calculateAutoLottoAmount() {
 		LottoMoney lottoMoney = new LottoMoney(10000);
-		ManualLottoAmount manualLottoAmount = new ManualLottoAmount(1);
+		ManualLottoAmount manualLottoAmount = ManualLottoAmount.of(1, lottoMoney);
 
 		int amount = lottoMoney.calculateRemainderAmount(manualLottoAmount);
 

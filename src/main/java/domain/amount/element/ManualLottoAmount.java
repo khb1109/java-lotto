@@ -5,7 +5,7 @@ import java.util.Objects;
 import domain.amount.LottoMoney;
 
 public final class ManualLottoAmount extends Amount {
-	public ManualLottoAmount(int amount) {
+	private ManualLottoAmount(int amount) {
 		super(amount);
 	}
 

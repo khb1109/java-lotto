@@ -37,10 +37,6 @@ public class Lotto {
 		return lottoNumbers.contains(lottoNumber);
 	}
 
-	public Set<LottoNumber> getLottoNumbers() {
-		return lottoNumbers;
-	}
-
 	public int countMatch(Lotto other) {
 		Objects.requireNonNull(other);
 		return (int)lottoNumbers.stream()
@@ -53,5 +49,9 @@ public class Lotto {
 		return "Lotto{" +
 			"lottoNumbers=" + lottoNumbers +
 			'}';
+	}
+
+	public Set<LottoNumber> getLottoNumbers() {
+		return lottoNumbers;
 	}
 }
