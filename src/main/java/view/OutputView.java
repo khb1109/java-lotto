@@ -26,6 +26,8 @@ public class OutputView {
 				.collect(Collectors.joining(DELIMITER));
 			System.out.printf("[%s]\n", numbers);
 		}
+
+		System.out.println();
 	}
 
 	public void showWinningStatistics() {
