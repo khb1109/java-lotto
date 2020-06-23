@@ -37,4 +37,13 @@ class LottoMoneyTest {
 
 		assertThat(amount).isEqualTo(9);
 	}
+
+	@DisplayName("수익금을 입력받아 수익률을 낸다.")
+	@Test
+	void calculateProfit() {
+		LottoMoney lottoMoney = new LottoMoney(10_000);
+		double profit = lottoMoney.calculateProfit(1_000_000);
+
+		assertThat(profit).isEqualTo(100);
+	}
 }

@@ -39,10 +39,10 @@ public class LottoController {
 		WinningLotto winningLotto = readWinningLotto();
 
 		LottoManager lottoManager = new LottoManager(lottos, winningLotto);
-		Map<Rank, Integer> rankByCount = lottoManager.calculateRanks();
+		Map<Rank, Integer> countByRank = lottoManager.calculateRanks();
 
-		outputView.showWinningStatistics(rankByCount);
-		outputView.showProfit();
+		outputView.showWinningStatistics(countByRank);
+		outputView.showProfit(lottoManager.calculateProfit(countByRank, lottoMoney));
 	}
 
 	private List<Lotto> readManualLottoNumbers(LottoAmount lottoAmount) {

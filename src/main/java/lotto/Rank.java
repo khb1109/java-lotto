@@ -50,4 +50,8 @@ public enum Rank {
 	public long getMoney() {
 		return money;
 	}
+
+	public long multiplyMoneyByCount(int count) {
+		return this.money * count;
+	}
 }

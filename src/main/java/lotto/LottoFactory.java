@@ -1,5 +1,7 @@
 package lotto;
 
+import static lotto.number.LottoNumber.*;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -12,7 +14,7 @@ public class LottoFactory {
 	private static final List<LottoNumber> lottoNumbers;
 
 	static {
-		lottoNumbers = IntStream.rangeClosed(1, 45)
+		lottoNumbers = IntStream.rangeClosed(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER)
 			.mapToObj(LottoNumber::valueOf)
 			.collect(Collectors.toList());
 	}

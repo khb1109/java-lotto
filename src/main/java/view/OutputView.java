@@ -41,7 +41,7 @@ public class OutputView {
 		}
 	}
 
-	public void showProfit() {
-		System.out.println("총 수익률은 30%입니다.");
+	public void showProfit(double profit) {
+		System.out.printf("총 수익률은 %.2f%%입니다.\n", profit);
 	}
 }

@@ -27,4 +27,8 @@ public class LottoMoney {
 	private int calculateLottoAmount() {
 		return (int)(amount / 1000);
 	}
+
+	public double calculateProfit(long winningMoney) {
+		return (double)winningMoney / amount;
+	}
 }

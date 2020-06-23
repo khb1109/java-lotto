@@ -6,12 +6,14 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.util.Arrays;
 import java.util.Map;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import helper.LottoProvider;
 import lotto.number.LottoNumber;
 
 class LottoManagerTest {
+	@DisplayName("로또티켓들과 당첨번호를 이용하여, 각 등수별 합계를 구한다.")
 	@Test
 	void calculateRanks() {
 		Lotto 일등 = LottoProvider.create(1, 2, 3, 4, 5, 6);
@@ -30,5 +32,23 @@ class LottoManagerTest {
 			() -> assertThat(actual.get(Rank.FIVE_BONUS)).isEqualTo(2),
 			() -> assertThat(actual.get(Rank.FIVE)).isEqualTo(2)
 		);
+	}
+
+	@DisplayName("등수별 합계와 배팅금을 통해 수익률을 계산한다.")
+	@Test
+	void calculateProfit() {
+		Lotto 삼등 = LottoProvider.create(1, 2, 3, 4, 5, 10);
+
+		Lotto winningNumbers = LottoProvider.create(1, 2, 3, 4, 5, 6);
+		WinningLotto winningLotto = new WinningLotto(winningNumbers, LottoNumber.valueOf(7));
+
+		LottoManager lottoManager = new LottoManager(Arrays.asList(삼등), winningLotto);
+		Map<Rank, Integer> countByRank = lottoManager.calculateRanks();
+
+		LottoMoney lottoMoney = new LottoMoney(100_000L);
+
+		double actual = lottoManager.calculateProfit(countByRank, lottoMoney);
+
+		assertThat(actual).isEqualTo(15);
 	}
 }
