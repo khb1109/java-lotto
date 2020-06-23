@@ -1,11 +1,9 @@
-package lotto.amount;
+package domain.amount;
 
 import static org.assertj.core.api.Assertions.*;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
-import lotto.LottoMoney;
 
 class LottoAmountTest {
 	@DisplayName("수동 티켓 가격이 구매가격보다 크면 에러가 발생한다.")

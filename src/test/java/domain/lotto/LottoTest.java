@@ -1,4 +1,4 @@
-package lotto;
+package domain.lotto;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -13,8 +13,8 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 
+import domain.lotto.number.LottoNumber;
 import helper.LottoProvider;
-import lotto.number.LottoNumber;
 
 class LottoTest {
 

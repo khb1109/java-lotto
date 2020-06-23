@@ -1,8 +1,9 @@
-package lotto.amount;
+package domain.amount;
 
-import lotto.LottoMoney;
-import lotto.amount.element.AutoLottoAmount;
-import lotto.amount.element.ManualLottoAmount;
+import java.util.Objects;
+
+import domain.amount.element.AutoLottoAmount;
+import domain.amount.element.ManualLottoAmount;
 
 public class LottoAmount {
 	private final ManualLottoAmount manualLottoAmount;
@@ -16,6 +17,8 @@ public class LottoAmount {
 	}
 
 	public static LottoAmount valueOf(LottoMoney lottoMoney, int manualAmount) {
+		Objects.requireNonNull(lottoMoney);
+
 		ManualLottoAmount manualLottoAmount = ManualLottoAmount.of(manualAmount, lottoMoney);
 		AutoLottoAmount autoLottoAmount = AutoLottoAmount.of(manualLottoAmount, lottoMoney);
 

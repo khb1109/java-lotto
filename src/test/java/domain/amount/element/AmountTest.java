@@ -1,4 +1,4 @@
-package lotto.amount.element;
+package domain.amount.element;
 
 import static org.assertj.core.api.Assertions.*;
 

@@ -1,4 +1,4 @@
-# java-lotto
+# java-domain.lotto
 로또 미션 진행을 위한 저장소
 
 ## 시나리오

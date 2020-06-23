@@ -1,4 +1,4 @@
-package lotto;
+package domain.lotto;
 
 import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.*;
@@ -9,8 +9,11 @@ import java.util.Map;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import domain.LottoManager;
+import domain.amount.LottoMoney;
+import domain.lotto.number.LottoNumber;
+import domain.statistics.Rank;
 import helper.LottoProvider;
-import lotto.number.LottoNumber;
 
 class LottoManagerTest {
 	@DisplayName("로또티켓들과 당첨번호를 이용하여, 각 등수별 합계를 구한다.")

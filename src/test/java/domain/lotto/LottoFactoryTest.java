@@ -1,4 +1,4 @@
-package lotto;
+package domain.lotto;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -10,8 +10,9 @@ import java.util.stream.IntStream;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import lotto.amount.LottoAmount;
-import lotto.number.LottoNumber;
+import domain.amount.LottoAmount;
+import domain.amount.LottoMoney;
+import domain.lotto.number.LottoNumber;
 
 class LottoFactoryTest {
 

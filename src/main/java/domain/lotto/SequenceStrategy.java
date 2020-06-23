@@ -1,8 +1,8 @@
-package lotto;
+package domain.lotto;
 
 import java.util.List;
 
-import lotto.number.LottoNumber;
+import domain.lotto.number.LottoNumber;
 
 @FunctionalInterface
 public interface SequenceStrategy {

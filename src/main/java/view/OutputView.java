@@ -4,10 +4,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import lotto.Lotto;
-import lotto.Rank;
-import lotto.amount.LottoAmount;
-import lotto.number.LottoNumber;
+import domain.amount.LottoAmount;
+import domain.lotto.Lotto;
+import domain.lotto.number.LottoNumber;
+import domain.statistics.Rank;
 
 public class OutputView {
 	private static final String DELIMITER = ", ";

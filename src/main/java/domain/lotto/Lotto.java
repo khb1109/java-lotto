@@ -1,10 +1,11 @@
-package lotto;
+package domain.lotto;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
-import lotto.number.LottoNumber;
+import domain.lotto.number.LottoNumber;
 
 public class Lotto {
 	public static final int LOTTO_SIZE = 6;
@@ -12,6 +13,8 @@ public class Lotto {
 	private final Set<LottoNumber> lottoNumbers;
 
 	public Lotto(List<LottoNumber> lottoNumbers) {
+		Objects.requireNonNull(lottoNumbers);
+
 		validateSize(lottoNumbers);
 		this.lottoNumbers = new HashSet<>(lottoNumbers);
 		validateDuplicate();
@@ -30,6 +33,7 @@ public class Lotto {
 	}
 
 	public boolean isContains(LottoNumber lottoNumber) {
+		Objects.requireNonNull(lottoNumber);
 		return lottoNumbers.contains(lottoNumber);
 	}
 
@@ -38,6 +42,7 @@ public class Lotto {
 	}
 
 	public int countMatch(Lotto other) {
+		Objects.requireNonNull(other);
 		return (int)lottoNumbers.stream()
 			.filter(other::isContains)
 			.count();

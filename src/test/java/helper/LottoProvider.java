@@ -4,8 +4,8 @@ import static java.util.stream.Collectors.*;
 
 import java.util.Arrays;
 
-import lotto.Lotto;
-import lotto.number.LottoNumber;
+import domain.lotto.Lotto;
+import domain.lotto.number.LottoNumber;
 
 public class LottoProvider {
 	public static Lotto create(int... number) {

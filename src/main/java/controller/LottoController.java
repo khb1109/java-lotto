@@ -7,14 +7,14 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
-import lotto.Lotto;
-import lotto.LottoFactory;
-import lotto.LottoManager;
-import lotto.LottoMoney;
-import lotto.Rank;
-import lotto.WinningLotto;
-import lotto.amount.LottoAmount;
-import lotto.number.LottoNumber;
+import domain.LottoManager;
+import domain.amount.LottoAmount;
+import domain.amount.LottoMoney;
+import domain.lotto.Lotto;
+import domain.lotto.LottoFactory;
+import domain.lotto.WinningLotto;
+import domain.lotto.number.LottoNumber;
+import domain.statistics.Rank;
 import view.InputView;
 import view.OutputView;
 

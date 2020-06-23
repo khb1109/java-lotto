@@ -1,4 +1,4 @@
-package lotto.amount.element;
+package domain.amount.element;
 
 public class Amount {
 	private final int amount;

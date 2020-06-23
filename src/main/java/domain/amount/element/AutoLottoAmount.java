@@ -1,6 +1,8 @@
-package lotto.amount.element;
+package domain.amount.element;
 
-import lotto.LottoMoney;
+import java.util.Objects;
+
+import domain.amount.LottoMoney;
 
 public final class AutoLottoAmount extends Amount {
 	public AutoLottoAmount(int amount) {
@@ -8,6 +10,8 @@ public final class AutoLottoAmount extends Amount {
 	}
 
 	public static AutoLottoAmount of(ManualLottoAmount manualLottoAmount, LottoMoney lottoMoney) {
+		Objects.requireNonNull(manualLottoAmount);
+		Objects.requireNonNull(lottoMoney);
 		return new AutoLottoAmount(lottoMoney.calculateRemainderAmount(manualLottoAmount));
 	}
 }

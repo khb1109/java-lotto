@@ -1,9 +1,13 @@
-package lotto;
+package domain.statistics;
 
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
+
+import domain.lotto.Lotto;
+import domain.lotto.WinningLotto;
 
 public enum Rank {
 	SIX(6, 2_000_000_000L),
@@ -22,6 +26,9 @@ public enum Rank {
 	}
 
 	public static Map<Rank, Integer> calculateStatistics(List<Lotto> lottos, WinningLotto winningLotto) {
+		Objects.requireNonNull(lottos);
+		Objects.requireNonNull(winningLotto);
+
 		Map<Rank, Integer> ranks = new HashMap<>();
 		for (Lotto lotto : lottos) {
 			int match = winningLotto.countMatch(lotto);

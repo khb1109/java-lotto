@@ -1,4 +1,4 @@
-package lotto;
+package domain.lotto;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -11,8 +11,9 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
+import domain.lotto.number.LottoNumber;
+import domain.statistics.Rank;
 import helper.LottoProvider;
-import lotto.number.LottoNumber;
 
 class RankTest {
 	@DisplayName("매치와 보너스 값을 이용하여 순위를 구한다.")

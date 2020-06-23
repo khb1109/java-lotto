@@ -1,4 +1,4 @@
-package lotto;
+package domain.lotto;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -9,8 +9,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
+import domain.lotto.number.LottoNumber;
 import helper.LottoProvider;
-import lotto.number.LottoNumber;
 
 class WinningLottoTest {
 	@DisplayName("당첨번호와 보너스 번호가 중복되면 에러가 발생한다.")

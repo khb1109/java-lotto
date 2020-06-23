@@ -1,4 +1,4 @@
-package lotto.number;
+package domain.lotto.number;
 
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -15,7 +15,7 @@ public class LottoNumber {
 		this.number = number;
 	}
 
-	public static LottoNumber valueOf(Integer number) {
+	public static LottoNumber valueOf(int number) {
 		validate(number);
 		return LottoNumberCache.lottoNumberByNumber
 			.get(number);

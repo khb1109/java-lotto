@@ -1,15 +1,16 @@
-package lotto;
+package domain.lotto;
 
-import static lotto.Lotto.*;
-import static lotto.number.LottoNumber.*;
+import static domain.lotto.Lotto.*;
+import static domain.lotto.number.LottoNumber.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import lotto.amount.LottoAmount;
-import lotto.number.LottoNumber;
+import domain.amount.LottoAmount;
+import domain.lotto.number.LottoNumber;
 
 public class LottoFactory {
 	private static final List<LottoNumber> lottoNumbers;
@@ -21,6 +22,9 @@ public class LottoFactory {
 	}
 
 	public static List<Lotto> createLotto(LottoAmount lottoAmount, SequenceStrategy sequenceStrategy) {
+		Objects.requireNonNull(lottoAmount);
+		Objects.requireNonNull(sequenceStrategy);
+
 		List<Lotto> lottos = new ArrayList<>();
 
 		for (int i = 0; i < lottoAmount.getAutoLottoAmount().getAmount(); i++) {

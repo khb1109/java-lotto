@@ -1,6 +1,8 @@
-package lotto;
+package domain.amount;
 
-import lotto.amount.element.ManualLottoAmount;
+import java.util.Objects;
+
+import domain.amount.element.ManualLottoAmount;
 
 public class LottoMoney {
 	private static final int LOTTO_PRICE = 1000;
@@ -23,6 +25,8 @@ public class LottoMoney {
 	}
 
 	public int calculateRemainderAmount(ManualLottoAmount manualLottoAmount) {
+		Objects.requireNonNull(manualLottoAmount);
+
 		return manualLottoAmount.minus(calculateLottoAmount()) * -1;
 	}
 

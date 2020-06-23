@@ -1,4 +1,4 @@
-package lotto;
+package domain.lotto;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -7,7 +7,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-import lotto.amount.element.ManualLottoAmount;
+import domain.amount.LottoMoney;
+import domain.amount.element.ManualLottoAmount;
 
 class LottoMoneyTest {
 	@DisplayName("로또 금액은 1000원 이상으로 입력해야한다.")

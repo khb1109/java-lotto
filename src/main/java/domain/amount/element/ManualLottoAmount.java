@@ -1,6 +1,8 @@
-package lotto.amount.element;
+package domain.amount.element;
 
-import lotto.LottoMoney;
+import java.util.Objects;
+
+import domain.amount.LottoMoney;
 
 public final class ManualLottoAmount extends Amount {
 	public ManualLottoAmount(int amount) {
@@ -8,6 +10,8 @@ public final class ManualLottoAmount extends Amount {
 	}
 
 	public static ManualLottoAmount of(int manualAmount, LottoMoney lottoMoney) {
+		Objects.requireNonNull(lottoMoney);
+
 		if (lottoMoney.isExcessLottoAmount(manualAmount)) {
 			throw new IllegalArgumentException(
 				"수동로또 구매 갯수가 금액을 초과했습니다. LottoMoney" + lottoMoney + " manualLottoAmount=" + manualAmount);
