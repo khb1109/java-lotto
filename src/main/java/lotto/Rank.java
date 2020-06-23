@@ -6,23 +6,19 @@ import java.util.List;
 import java.util.Map;
 
 public enum Rank {
-	SIX(6),
-	FIVE_BONUS(5, true),
-	FIVE(5),
-	FOUR(4),
-	THREE(3),
-	NONE_MATCH(6);
+	SIX(6, 2_000_000_000L),
+	FIVE_BONUS(5, 30_000_000L),
+	FIVE(5, 1_500_000L),
+	FOUR(4, 50_000L),
+	THREE(3, 5_000L),
+	NONE_MATCH(0, 0L);
 
 	private final int match;
-	private final boolean bonus;
+	private final long money;
 
-	Rank(int match) {
-		this(match, false);
-	}
-
-	Rank(int match, boolean bonus) {
+	Rank(int match, long money) {
 		this.match = match;
-		this.bonus = bonus;
+		this.money = money;
 	}
 
 	public static Map<Rank, Integer> calculateStatistics(List<Lotto> lottos, WinningLotto winningLotto) {
@@ -43,7 +39,7 @@ public enum Rank {
 		return Arrays.stream(values())
 			.filter(rank -> rank.match == match)
 			.filter(rank -> !rank.equals(FIVE_BONUS) || hasBonusMatch)
-			.findFirst()
+			.findAny()
 			.orElse(NONE_MATCH);
 	}
 
@@ -51,7 +47,7 @@ public enum Rank {
 		return match;
 	}
 
-	public boolean isBonus() {
-		return bonus;
+	public long getMoney() {
+		return money;
 	}
 }

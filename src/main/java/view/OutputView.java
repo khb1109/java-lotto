@@ -32,14 +32,13 @@ public class OutputView {
 		System.out.println();
 	}
 
-	public void showWinningStatistics(Map<Rank, Integer> lottoManager) {
-		System.out.println("당첨 통계\n"
-			+ "---------\n"
-			+ "3개 일치 (5000원)- 1개\n"
-			+ "4개 일치 (50000원)- 0개\n"
-			+ "5개 일치 (1500000원)- 0개\n"
-			+ "5개 일치, 보너스 볼 일치(30000000원) - 0개\n"
-			+ "6개 일치 (2000000000원)- 0개");
+	public void showWinningStatistics(Map<Rank, Integer> countByRank) {
+		System.out.println("당첨 통계");
+		System.out.println("---------");
+		for (Rank rank : Rank.values()) {
+			System.out.printf("%d개 일치 (%d원)- %d개\n", rank.getMatch(), rank.getMoney(),
+				countByRank.getOrDefault(rank, 0));
+		}
 	}
 
 	public void showProfit() {
