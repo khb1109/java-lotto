@@ -1,5 +1,6 @@
 package lotto;
 
+import static lotto.Lotto.*;
 import static lotto.number.LottoNumber.*;
 
 import java.util.ArrayList;
@@ -24,7 +25,7 @@ public class LottoFactory {
 
 		for (int i = 0; i < lottoAmount.getAutoLottoAmount().getAmount(); i++) {
 			sequenceStrategy.shake(lottoNumbers);
-			lottos.add(new Lotto(lottoNumbers.subList(0, 6)));
+			lottos.add(new Lotto(lottoNumbers.subList(0, LOTTO_SIZE)));
 		}
 		return lottos;
 	}

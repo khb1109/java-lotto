@@ -3,6 +3,8 @@ package lotto;
 import lotto.amount.element.ManualLottoAmount;
 
 public class LottoMoney {
+	private static final int LOTTO_PRICE = 1000;
+
 	private final long amount;
 
 	public LottoMoney(long amount) {
@@ -11,7 +13,7 @@ public class LottoMoney {
 	}
 
 	private void validate(long amount) {
-		if (amount < 1000) {
+		if (amount < LOTTO_PRICE) {
 			throw new IllegalArgumentException("로또의 금액은 1000원 이상이 필요합니다. amount=" + amount);
 		}
 	}
@@ -25,7 +27,7 @@ public class LottoMoney {
 	}
 
 	private int calculateLottoAmount() {
-		return (int)(amount / 1000);
+		return (int)(amount / LOTTO_PRICE);
 	}
 
 	public double calculateProfit(long winningMoney) {

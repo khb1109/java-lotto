@@ -42,7 +42,7 @@ public class LottoNumber {
 		private static final Map<Integer, LottoNumber> lottoNumberByNumber;
 
 		static {
-			lottoNumberByNumber = IntStream.rangeClosed(1, 45)
+			lottoNumberByNumber = IntStream.rangeClosed(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER)
 				.mapToObj(LottoNumber::new)
 				.collect(Collectors.toMap(LottoNumber::getNumber, lottoNumber -> lottoNumber));
 		}

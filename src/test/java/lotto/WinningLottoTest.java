@@ -44,9 +44,6 @@ class WinningLottoTest {
 		LottoNumber bonus = LottoNumber.valueOf(7);
 		WinningLotto winningLotto = new WinningLotto(lotto, bonus);
 
-		System.out.println(winningLotto);
-		System.out.println(LottoProvider.create(1, 2, 3, 4, 5, number));
-
 		boolean actual = winningLotto.checkBonus(LottoProvider.create(1, 2, 3, 4, 5, number));
 
 		assertThat(actual).isEqualTo(expect);

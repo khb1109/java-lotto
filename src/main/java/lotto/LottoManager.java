@@ -18,13 +18,12 @@ public class LottoManager {
 
 	public double calculateProfit(Map<Rank, Integer> countByRank, LottoMoney lottoMoney) {
 		long winningMoney = 0L;
+
 		for (Rank rank : Rank.values()) {
 			int count = countByRank.getOrDefault(rank, 0);
 			winningMoney += rank.multiplyMoneyByCount(count);
 		}
 
-		System.out.println(winningMoney);
-		double profit = lottoMoney.calculateProfit(winningMoney);
-		return profit;
+		return lottoMoney.calculateProfit(winningMoney);
 	}
 }
