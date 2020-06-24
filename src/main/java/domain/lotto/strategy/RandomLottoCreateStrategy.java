@@ -12,7 +12,6 @@ public class RandomLottoCreateStrategy implements LottoCreateStrategy {
 	public Lotto execute(List<LottoNumber> lottoNumbers) {
 		ArrayList<LottoNumber> copiedLottoNumbers = new ArrayList<>(lottoNumbers);
 		Collections.shuffle(copiedLottoNumbers);
-
-		return new Lotto(copiedLottoNumbers.subList(1, 6));
+		return new Lotto(copiedLottoNumbers.subList(0, Lotto.SIZE));
 	}
 }

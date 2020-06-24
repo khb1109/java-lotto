@@ -1,7 +1,5 @@
 package domain.lotto;
 
-import static domain.lotto.Lotto.*;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -20,8 +18,8 @@ public class LottoFactory {
 		List<Lotto> lottos = new ArrayList<>();
 
 		for (int i = 0; i < lottoAmount.getAutoLottoAmount().getAmount(); i++) {
-			lottoCreateStrategy.execute(lottoNumbers);
-			lottos.add(new Lotto(lottoNumbers.subList(0, SIZE)));
+			Lotto lotto = lottoCreateStrategy.execute(lottoNumbers);
+			lottos.add(lotto);
 		}
 
 		return lottos;

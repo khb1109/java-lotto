@@ -52,6 +52,6 @@ class LottoManagerTest {
 
 		double actual = lottoManager.calculateProfit(countByRank, lottoMoney);
 
-		assertThat(actual).isEqualTo(15);
+		assertThat(actual).isEqualTo(1400);
 	}
 }

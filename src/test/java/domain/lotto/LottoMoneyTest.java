@@ -45,6 +45,6 @@ class LottoMoneyTest {
 		LottoMoney lottoMoney = new LottoMoney(10_000);
 		double profit = lottoMoney.calculateProfit(1_000_000);
 
-		assertThat(profit).isEqualTo(100);
+		assertThat(profit).isEqualTo(9900);
 	}
 }

@@ -6,6 +6,7 @@ import domain.amount.element.ManualLottoAmount;
 
 public class LottoMoney {
 	private static final int LOTTO_PRICE = 1000;
+	private static final int PERCENT = 100;
 
 	private final long amount;
 
@@ -35,6 +36,7 @@ public class LottoMoney {
 	}
 
 	public double calculateProfit(long winningMoney) {
-		return (double)winningMoney / amount;
+		long revenue = winningMoney - amount;
+		return ((double)revenue / amount) * PERCENT;
 	}
 }
