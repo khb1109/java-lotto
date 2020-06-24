@@ -1,6 +1,6 @@
 package domain.amount.element;
 
-public class Amount {
+public abstract class Amount {
 	private final int amount;
 
 	Amount(int amount) {

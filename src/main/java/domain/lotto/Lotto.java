@@ -37,7 +37,7 @@ public class Lotto {
 			.count();
 
 		if (count != SIZE) {
-			throw new IllegalArgumentException("로또 번호는 중복될 수 없습니다." + this.lottoNumbers);
+			throw new IllegalArgumentException("로또 번호는 중복될 수 없습니다." + lottoNumbers);
 		}
 	}
 
@@ -61,6 +61,6 @@ public class Lotto {
 	}
 
 	public List<LottoNumber> getLottoNumbers() {
-		return lottoNumbers;
+		return Collections.unmodifiableList(lottoNumbers);
 	}
 }
