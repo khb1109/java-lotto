@@ -13,7 +13,7 @@ import domain.lotto.Lotto;
 import domain.lotto.LottoFactory;
 import domain.lotto.WinningLotto;
 import domain.lotto.number.LottoNumber;
-import domain.lotto.strategy.SequenceStrategy;
+import domain.lotto.strategy.LottoCreateStrategy;
 import domain.statistics.Rank;
 import view.InputView;
 import view.OutputView;
@@ -21,13 +21,13 @@ import view.OutputView;
 public class LottoController {
 	private final InputView inputView;
 	private final OutputView outputView;
-	private final SequenceStrategy sequenceStrategy;
+	private final LottoCreateStrategy lottoCreateStrategy;
 
 	public LottoController(InputView inputView, OutputView outputView,
-		SequenceStrategy sequenceStrategy) {
+		LottoCreateStrategy lottoCreateStrategy) {
 		this.inputView = inputView;
 		this.outputView = outputView;
-		this.sequenceStrategy = sequenceStrategy;
+		this.lottoCreateStrategy = lottoCreateStrategy;
 	}
 
 	public void run() {
@@ -65,7 +65,7 @@ public class LottoController {
 	}
 
 	private List<Lotto> buyAutoLottos(LottoAmount lottoAmount) {
-		return LottoFactory.createLotto(lottoAmount, sequenceStrategy);
+		return LottoFactory.createLotto(lottoAmount, lottoCreateStrategy);
 	}
 
 	private WinningLotto readWinningLotto() {

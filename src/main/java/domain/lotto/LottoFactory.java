@@ -1,37 +1,29 @@
 package domain.lotto;
 
 import static domain.lotto.Lotto.*;
-import static domain.lotto.number.LottoNumber.*;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 import domain.amount.LottoAmount;
 import domain.lotto.number.LottoNumber;
-import domain.lotto.strategy.SequenceStrategy;
+import domain.lotto.strategy.LottoCreateStrategy;
 
 public class LottoFactory {
-	private static final List<LottoNumber> lottoNumbers;
+	private static final List<LottoNumber> lottoNumbers = LottoNumber.getCachedLottoNumbers();
 
-	static {
-		lottoNumbers = IntStream.rangeClosed(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER)
-			.mapToObj(LottoNumber::valueOf)
-			.collect(Collectors.toList());
-	}
-
-	public static List<Lotto> createLotto(LottoAmount lottoAmount, SequenceStrategy sequenceStrategy) {
+	public static List<Lotto> createLotto(LottoAmount lottoAmount, LottoCreateStrategy lottoCreateStrategy) {
 		Objects.requireNonNull(lottoAmount);
-		Objects.requireNonNull(sequenceStrategy);
+		Objects.requireNonNull(lottoCreateStrategy);
 
 		List<Lotto> lottos = new ArrayList<>();
 
 		for (int i = 0; i < lottoAmount.getAutoLottoAmount().getAmount(); i++) {
-			sequenceStrategy.shake(lottoNumbers);
+			lottoCreateStrategy.execute(lottoNumbers);
 			lottos.add(new Lotto(lottoNumbers.subList(0, SIZE)));
 		}
+
 		return lottos;
 	}
 }

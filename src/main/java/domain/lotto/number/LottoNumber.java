@@ -1,5 +1,7 @@
 package domain.lotto.number;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -17,7 +19,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
 	public static LottoNumber valueOf(int number) {
 		validate(number);
-		return LottoNumberCache.lottoNumberByNumber
+		return LottoNumberCache.LOTTO_NUMBER_BY_VALUE
 			.get(number);
 	}
 
@@ -25,6 +27,10 @@ public class LottoNumber implements Comparable<LottoNumber> {
 		if (number < MIN_LOTTO_NUMBER || number > MAX_LOTTO_NUMBER) {
 			throw new IllegalArgumentException("유효하지 않는 로또범위를 입력했습니다. number=" + number);
 		}
+	}
+
+	public static List<LottoNumber> getCachedLottoNumbers() {
+		return new ArrayList<>(LottoNumberCache.LOTTO_NUMBER_BY_VALUE.values());
 	}
 
 	@Override
@@ -43,11 +49,11 @@ public class LottoNumber implements Comparable<LottoNumber> {
 		return number;
 	}
 
-	static class LottoNumberCache {
-		private static final Map<Integer, LottoNumber> lottoNumberByNumber;
+	private static class LottoNumberCache {
+		private static final Map<Integer, LottoNumber> LOTTO_NUMBER_BY_VALUE;
 
 		static {
-			lottoNumberByNumber = IntStream.rangeClosed(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER)
+			LOTTO_NUMBER_BY_VALUE = IntStream.rangeClosed(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER)
 				.mapToObj(LottoNumber::new)
 				.collect(Collectors.toMap(LottoNumber::getNumber, lottoNumber -> lottoNumber));
 		}

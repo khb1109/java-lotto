@@ -65,7 +65,7 @@ class LottoTest {
 		Lotto lotto = new Lotto(lottoNumbers);
 		LottoNumber lottoNumber = LottoNumber.valueOf(number);
 
-		assertThat(lotto.isContains(lottoNumber)).isEqualTo(expect);
+		assertThat(lotto.contains(lottoNumber)).isEqualTo(expect);
 	}
 
 	@DisplayName("로또 번호와 비교하여 몇개 맞았는지 확인한다.")

@@ -18,7 +18,7 @@ public class WinningLotto {
 		Objects.requireNonNull(lotto);
 		Objects.requireNonNull(lottoNumber);
 
-		if (lotto.isContains(lottoNumber)) {
+		if (lotto.contains(lottoNumber)) {
 			throw new IllegalArgumentException(
 				"당첨번호와 보너스번호는 중복될 수 없습니다. domain.lotto=" + lotto + "lottoNumber" + lottoNumber);
 		}
@@ -29,7 +29,7 @@ public class WinningLotto {
 	}
 
 	public boolean checkBonus(Lotto lotto) {
-		return lotto.isContains(this.bonusNumber);
+		return lotto.contains(this.bonusNumber);
 	}
 
 	@Override

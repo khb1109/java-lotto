@@ -13,12 +13,16 @@ public class Lotto {
 	private final List<LottoNumber> lottoNumbers;
 
 	public Lotto(List<LottoNumber> lottoNumbers) {
-		Objects.requireNonNull(lottoNumbers);
-		validateSize(lottoNumbers);
-		validateDuplicate(lottoNumbers);
+		validate(lottoNumbers);
 
 		this.lottoNumbers = new ArrayList<>(lottoNumbers);
 		Collections.sort(this.lottoNumbers);
+	}
+
+	private void validate(List<LottoNumber> lottoNumbers) {
+		Objects.requireNonNull(lottoNumbers);
+		validateSize(lottoNumbers);
+		validateDuplicate(lottoNumbers);
 	}
 
 	private void validateSize(List<LottoNumber> lottoNumbers) {
@@ -37,7 +41,7 @@ public class Lotto {
 		}
 	}
 
-	public boolean isContains(LottoNumber lottoNumber) {
+	public boolean contains(LottoNumber lottoNumber) {
 		Objects.requireNonNull(lottoNumber);
 		return lottoNumbers.contains(lottoNumber);
 	}
@@ -45,7 +49,7 @@ public class Lotto {
 	public int countMatch(Lotto other) {
 		Objects.requireNonNull(other);
 		return (int)lottoNumbers.stream()
-			.filter(other::isContains)
+			.filter(other::contains)
 			.count();
 	}
 

@@ -12,15 +12,16 @@ import org.junit.jupiter.api.Test;
 import domain.amount.LottoAmount;
 import domain.amount.LottoMoney;
 import domain.lotto.number.LottoNumber;
+import helper.LottoProvider;
 
 class LottoFactoryTest {
-
 	@DisplayName("자동 로또를 구매하여 로또를 확인한다.")
 	@Test
 	void testCreateLotto() {
 		LottoAmount lottoAmount = LottoAmount.valueOf(new LottoMoney(1000), 0);
-		List<Lotto> lotto = LottoFactory.createLotto(lottoAmount, lottoNumbers -> {
-		});
+		List<Lotto> lotto = LottoFactory.createLotto(lottoAmount, lottoNumbers ->
+			LottoProvider.create(1, 2, 3, 4, 5, 6)
+		);
 
 		List<LottoNumber> expect = IntStream.rangeClosed(1, 6)
 			.mapToObj(LottoNumber::valueOf)
