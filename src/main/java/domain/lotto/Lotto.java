@@ -1,34 +1,39 @@
 package domain.lotto;
 
-import java.util.HashSet;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 
 import domain.lotto.number.LottoNumber;
 
 public class Lotto {
-	public static final int LOTTO_SIZE = 6;
+	public static final int SIZE = 6;
 
-	private final Set<LottoNumber> lottoNumbers;
+	private final List<LottoNumber> lottoNumbers;
 
 	public Lotto(List<LottoNumber> lottoNumbers) {
 		Objects.requireNonNull(lottoNumbers);
-
 		validateSize(lottoNumbers);
-		this.lottoNumbers = new HashSet<>(lottoNumbers);
-		validateDuplicate();
-	}
+		validateDuplicate(lottoNumbers);
 
-	private void validateDuplicate() {
-		if (this.lottoNumbers.size() != LOTTO_SIZE) {
-			throw new IllegalArgumentException("로또 번호는 중복될 수 없습니다." + this.lottoNumbers);
-		}
+		this.lottoNumbers = new ArrayList<>(lottoNumbers);
+		Collections.sort(this.lottoNumbers);
 	}
 
 	private void validateSize(List<LottoNumber> lottoNumbers) {
-		if (lottoNumbers.size() != LOTTO_SIZE) {
+		if (lottoNumbers.size() != SIZE) {
 			throw new IllegalArgumentException("로또는 로또넘버 6개로 만들 수 있습니다. lottoNumbers=" + lottoNumbers);
+		}
+	}
+
+	private void validateDuplicate(List<LottoNumber> lottoNumbers) {
+		long count = lottoNumbers.stream()
+			.distinct()
+			.count();
+
+		if (count != SIZE) {
+			throw new IllegalArgumentException("로또 번호는 중복될 수 없습니다." + this.lottoNumbers);
 		}
 	}
 
@@ -51,7 +56,7 @@ public class Lotto {
 			'}';
 	}
 
-	public Set<LottoNumber> getLottoNumbers() {
+	public List<LottoNumber> getLottoNumbers() {
 		return lottoNumbers;
 	}
 }

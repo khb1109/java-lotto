@@ -4,7 +4,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class LottoNumber {
+public class LottoNumber implements Comparable<LottoNumber> {
 	public static final int MIN_LOTTO_NUMBER = 1;
 	public static final int MAX_LOTTO_NUMBER = 45;
 
@@ -25,6 +25,11 @@ public class LottoNumber {
 		if (number < MIN_LOTTO_NUMBER || number > MAX_LOTTO_NUMBER) {
 			throw new IllegalArgumentException("유효하지 않는 로또범위를 입력했습니다. number=" + number);
 		}
+	}
+
+	@Override
+	public int compareTo(LottoNumber other) {
+		return Integer.compare(number, other.number);
 	}
 
 	@Override

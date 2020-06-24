@@ -30,7 +30,7 @@ public class LottoFactory {
 
 		for (int i = 0; i < lottoAmount.getAutoLottoAmount().getAmount(); i++) {
 			sequenceStrategy.shake(lottoNumbers);
-			lottos.add(new Lotto(lottoNumbers.subList(0, LOTTO_SIZE)));
+			lottos.add(new Lotto(lottoNumbers.subList(0, SIZE)));
 		}
 		return lottos;
 	}

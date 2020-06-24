@@ -3,7 +3,6 @@ package domain.lotto;
 import static org.assertj.core.api.Assertions.*;
 
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -27,7 +26,7 @@ class LottoFactoryTest {
 			.mapToObj(LottoNumber::valueOf)
 			.collect(Collectors.toList());
 
-		Set<LottoNumber> actual = lotto.get(0).getLottoNumbers();
+		List<LottoNumber> actual = lotto.get(0).getLottoNumbers();
 		assertThat(actual).containsAll(expect);
 	}
 }
