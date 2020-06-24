@@ -7,11 +7,13 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
+import domain.amount.LottoMoney;
+
 class AmountTest {
 	@DisplayName("수량은 음수를 입력하면 에러가 발생한다.")
 	@Test
 	void name() {
-		assertThatThrownBy(() -> new Amount(-1))
+		assertThatThrownBy(() -> ManualLottoAmount.of(-1, new LottoMoney(1000)))
 			.isInstanceOf(IllegalArgumentException.class)
 			.hasMessageContaining("수량은 음수를 입력할 수 없습니다.");
 	}
@@ -20,7 +22,7 @@ class AmountTest {
 	@CsvSource(value = {"0,true", "1,false"})
 	@ParameterizedTest
 	void name2(int other, boolean expect) {
-		Amount amount = new Amount(1);
+		Amount amount = ManualLottoAmount.of(1, new LottoMoney(1000));
 
 		assertThat(amount.isExcess(other)).isEqualTo(expect);
 	}
@@ -29,7 +31,7 @@ class AmountTest {
 	@CsvSource(value = {"5,0", "1,4"})
 	@ParameterizedTest
 	void name(int other, int expect) {
-		Amount amount = new Amount(5);
+		Amount amount = ManualLottoAmount.of(5, new LottoMoney(5000));
 		assertThat(amount.minus(other)).isEqualTo(expect);
 	}
 }
