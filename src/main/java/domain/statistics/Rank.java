@@ -1,53 +1,34 @@
 package domain.statistics;
 
 import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-
-import domain.lotto.Lotto;
-import domain.lotto.WinningLotto;
 
 public enum Rank {
-	SIX(6, 2_000_000_000L),
-	FIVE_BONUS(5, 30_000_000L),
-	FIVE(5, 1_500_000L),
-	FOUR(4, 50_000L),
-	THREE(3, 5_000L),
-	NONE_MATCH(0, 0L);
+	SIX(6, 2_000_000_000L, LottoMatchStrategy.DEFAULT),
+	FIVE_BONUS(5, 30_000_000L, LottoMatchStrategy.BONUS),
+	FIVE(5, 1_500_000L, LottoMatchStrategy.NO_BONUS),
+	FOUR(4, 50_000L, LottoMatchStrategy.DEFAULT),
+	THREE(3, 5_000L, LottoMatchStrategy.DEFAULT),
+	NONE_MATCH(0, 0L, LottoMatchStrategy.UNDER);
 
 	private final int match;
 	private final long money;
+	private final LottoMatchStrategy lottoMatchStrategy;
 
-	Rank(int match, long money) {
+	Rank(int match, long money, LottoMatchStrategy lottoMatchStrategy) {
+		this.lottoMatchStrategy = lottoMatchStrategy;
 		this.match = match;
 		this.money = money;
 	}
 
-	public static Map<Rank, Integer> calculateStatistics(List<Lotto> lottos, WinningLotto winningLotto) {
-		Objects.requireNonNull(lottos);
-		Objects.requireNonNull(winningLotto);
-
-		Map<Rank, Integer> ranks = new HashMap<>();
-		for (Lotto lotto : lottos) {
-			int match = winningLotto.countMatch(lotto);
-			boolean isBonusMatch = winningLotto.checkBonus(lotto);
-
-			Rank rank = Rank.of(match, isBonusMatch);
-			Integer rankByCount = ranks.getOrDefault(rank, 0);
-
-			ranks.put(rank, rankByCount + 1);
-		}
-		return ranks;
-	}
-
-	private static Rank of(int match, boolean hasBonusMatch) {
+	public static Rank of(int match, boolean hasBonusMatch) {
 		return Arrays.stream(values())
-			.filter(rank -> rank.isSameMatch(match))
-			.filter(rank -> !rank.equals(FIVE_BONUS) || hasBonusMatch)
+			.filter(rank -> rank.isMatch(match, hasBonusMatch))
 			.findAny()
 			.orElse(NONE_MATCH);
+	}
+
+	private boolean isMatch(int match, boolean hasBonusMatch) {
+		return lottoMatchStrategy.isMatch(this, match, hasBonusMatch);
 	}
 
 	private boolean isSameMatch(int match) {
@@ -64,5 +45,28 @@ public enum Rank {
 
 	public long getMoney() {
 		return money;
+	}
+
+	private enum LottoMatchStrategy implements MatchStrategy {
+		DEFAULT((rank, match, bonusMatch) -> rank.isSameMatch(match)),
+		BONUS((rank, match, bonusMatch) -> rank.isSameMatch(match) && bonusMatch),
+		NO_BONUS((rank, match, bonusMatch) -> rank.isSameMatch(match) && !bonusMatch),
+		UNDER((rank, match, bonusMatch) -> match < 3);
+
+		private final MatchStrategy matchStrategy;
+
+		LottoMatchStrategy(MatchStrategy matchStrategy) {
+			this.matchStrategy = matchStrategy;
+		}
+
+		@Override
+		public boolean isMatch(Rank rank, int match, boolean bonusMatch) {
+			return matchStrategy.isMatch(rank, match, bonusMatch);
+		}
+	}
+
+	@FunctionalInterface
+	private interface MatchStrategy {
+		boolean isMatch(Rank rank, int match, boolean bonusMatch);
 	}
 }

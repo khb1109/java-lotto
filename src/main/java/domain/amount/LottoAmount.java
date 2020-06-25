@@ -9,11 +9,13 @@ public class LottoAmount {
 	private final ManualLottoAmount manualLottoAmount;
 	private final AutoLottoAmount autoLottoAmount;
 	private int manualLottoCount;
+	private int autoLottoCount;
 
 	private LottoAmount(ManualLottoAmount manualLottoAmount, AutoLottoAmount autoLottoAmount) {
 		this.manualLottoAmount = manualLottoAmount;
 		this.autoLottoAmount = autoLottoAmount;
 		this.manualLottoCount = 0;
+		this.autoLottoCount = 0;
 	}
 
 	public static LottoAmount valueOf(LottoMoney lottoMoney, int manualAmount) {
@@ -25,12 +27,20 @@ public class LottoAmount {
 		return new LottoAmount(manualLottoAmount, autoLottoAmount);
 	}
 
-	public boolean hasNext() {
+	public boolean canBoughtManualLotto() {
 		return manualLottoAmount.isExcess(manualLottoCount);
 	}
 
-	public void next() {
+	public void nextManualLotto() {
 		manualLottoCount++;
+	}
+
+	public boolean canBoughtAutoLotto() {
+		return autoLottoAmount.isExcess(autoLottoCount);
+	}
+
+	public void nextAutoLotto() {
+		autoLottoCount++;
 	}
 
 	public ManualLottoAmount getManualLottoAmount() {
@@ -43,5 +53,9 @@ public class LottoAmount {
 
 	public int getManualLottoCount() {
 		return manualLottoCount;
+	}
+
+	public int getAutoLottoCount() {
+		return autoLottoCount;
 	}
 }

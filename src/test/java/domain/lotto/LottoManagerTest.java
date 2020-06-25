@@ -9,7 +9,6 @@ import java.util.Map;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import domain.LottoManager;
 import domain.amount.LottoMoney;
 import domain.lotto.number.LottoNumber;
 import domain.statistics.Rank;
@@ -26,7 +25,7 @@ class LottoManagerTest {
 		Lotto winningNumbers = LottoProvider.create(1, 2, 3, 4, 5, 6);
 		WinningLotto winningLotto = new WinningLotto(winningNumbers, LottoNumber.valueOf(7));
 
-		LottoManager lottoManager = new LottoManager(Arrays.asList(일등, 이등, 이등, 삼등, 삼등), winningLotto);
+		LottoManager lottoManager = new LottoManager(new LottoTickets(Arrays.asList(일등, 이등, 이등, 삼등, 삼등)), winningLotto);
 
 		Map<Rank, Integer> actual = lottoManager.calculateRanks();
 
@@ -45,7 +44,7 @@ class LottoManagerTest {
 		Lotto winningNumbers = LottoProvider.create(1, 2, 3, 4, 5, 6);
 		WinningLotto winningLotto = new WinningLotto(winningNumbers, LottoNumber.valueOf(7));
 
-		LottoManager lottoManager = new LottoManager(Arrays.asList(삼등), winningLotto);
+		LottoManager lottoManager = new LottoManager(new LottoTickets(Arrays.asList(삼등)), winningLotto);
 		Map<Rank, Integer> countByRank = lottoManager.calculateRanks();
 
 		LottoMoney lottoMoney = new LottoMoney(100_000L);

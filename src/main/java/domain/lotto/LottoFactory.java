@@ -17,9 +17,11 @@ public class LottoFactory {
 
 		List<Lotto> lottos = new ArrayList<>();
 
-		for (int i = 0; i < lottoAmount.getAutoLottoAmount().getAmount(); i++) {
+		while (lottoAmount.canBoughtAutoLotto()) {
 			Lotto lotto = lottoCreateStrategy.execute(lottoNumbers);
 			lottos.add(lotto);
+
+			lottoAmount.nextAutoLotto();
 		}
 
 		return lottos;

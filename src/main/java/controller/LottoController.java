@@ -6,11 +6,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import domain.LottoManager;
 import domain.amount.LottoAmount;
 import domain.amount.LottoMoney;
 import domain.lotto.Lotto;
 import domain.lotto.LottoFactory;
+import domain.lotto.LottoManager;
+import domain.lotto.LottoTickets;
 import domain.lotto.WinningLotto;
 import domain.lotto.number.LottoNumber;
 import domain.lotto.strategy.LottoCreateStrategy;
@@ -35,33 +36,33 @@ public class LottoController {
 		LottoAmount lottoAmount = LottoAmount.valueOf(lottoMoney, inputView.manualLottoAmount());
 
 		outputView.showManualLotto();
-		List<Lotto> lottos = readManualLottoNumbers(lottoAmount);
-		lottos.addAll(buyAutoLottos(lottoAmount));
-		outputView.showPurchasedLotto(lottoAmount, lottos);
+		LottoTickets lottoTickets = readManualLottoNumbers(lottoAmount);
+		LottoTickets allLottoTickets = lottoTickets.concat(buyAutoLottos(lottoAmount));
+		outputView.showPurchasedLotto(lottoAmount, allLottoTickets);
 
 		WinningLotto winningLotto = readWinningLotto();
 
-		LottoManager lottoManager = new LottoManager(lottos, winningLotto);
+		LottoManager lottoManager = new LottoManager(allLottoTickets, winningLotto);
 		Map<Rank, Integer> countByRank = lottoManager.calculateRanks();
 
 		outputView.showWinningStatistics(countByRank);
 		outputView.showProfit(lottoManager.calculateProfit(countByRank, lottoMoney));
 	}
 
-	private List<Lotto> readManualLottoNumbers(LottoAmount lottoAmount) {
+	private LottoTickets readManualLottoNumbers(LottoAmount lottoAmount) {
 		List<Lotto> lottos = new ArrayList<>();
 
-		while (lottoAmount.hasNext()) {
+		while (lottoAmount.canBoughtManualLotto()) {
 			lottos.add(
 				inputView.manualLotto()
 					.stream()
 					.map(LottoNumber::valueOf)
 					.collect(collectingAndThen(toList(), Lotto::new))
 			);
-			lottoAmount.next();
+			lottoAmount.nextManualLotto();
 		}
 
-		return lottos;
+		return new LottoTickets(lottos);
 	}
 
 	private List<Lotto> buyAutoLottos(LottoAmount lottoAmount) {
